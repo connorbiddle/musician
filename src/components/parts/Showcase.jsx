@@ -15,7 +15,8 @@ const Showcase = () => {
 };
 
 const StyledShowcase = styled.header`
-  height: 100vh;
+  height: ${window.innerHeight}px;
+  // ^ vh units can cause issues on mobile devices. ^
   position: relative;
   display: flex;
   flex-direction: column;
