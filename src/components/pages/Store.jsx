@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import Page from "../presentational/Page";
-import products from "../../fakeProducts";
 import Products from "../parts/Products";
 import Pagination from "../utilities/Pagination";
 import Dropdown from "../utilities/Dropdown";
+import products from "../../products";
 
 const PRODUCTS_PER_PAGE = 4;
 
-const Store = () => {
+const Store = ({ appHeight }) => {
   const [allProducts, setAllProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const [shownProducts, setShownProducts] = useState(null);
@@ -21,36 +22,37 @@ const Store = () => {
   }, []);
 
   const getCategories = () => {
-    const categories = [];
-    for (let product of allProducts) {
-      categories.push(product.category);
-    }
-    return [...new Set(categories)];
+    return [...new Set(allProducts.map(p => p.category))];
   };
 
   const onDropdownChange = choice => {
-    if (choice === null) {
-      setFilteredProducts(allProducts);
+    if (choice) {
+      setFilteredProducts(allProducts.filter(prod => prod.category === choice));
     } else {
-      setFilteredProducts(
-        allProducts.filter(product => product.category === choice)
-      );
+      setFilteredProducts(allProducts);
     }
   };
 
-  const onPageChange = (firstIndex, lastIndex) => {
-    setShownProducts(filteredProducts.slice(firstIndex, lastIndex + 1));
+  const onPageChange = newItems => {
+    setShownProducts(newItems);
   };
 
+  useEffect(() => {
+    if (filteredProducts) setShownProducts(filteredProducts.slice(0, 4));
+  }, [filteredProducts]);
+
   return (
-    <Page>
+    <Page appHeight={appHeight}>
       {shownProducts ? (
         <>
-          <Dropdown options={getCategories()} onChange={onDropdownChange} />
+          <StyledDropdown
+            options={getCategories()}
+            onChange={onDropdownChange}
+          />
           <Products products={shownProducts} />
-          <Pagination
+          <StyledPagination
             key={filteredProducts}
-            totalItems={filteredProducts.length}
+            items={filteredProducts}
             itemsPerPage={PRODUCTS_PER_PAGE}
             onChange={onPageChange}
           />
@@ -61,5 +63,20 @@ const Store = () => {
     </Page>
   );
 };
+
+const StyledDropdown = styled(Dropdown)`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+`;
+
+const StyledPagination = styled(Pagination)`
+  position: absolute;
+  bottom: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 export default Store;

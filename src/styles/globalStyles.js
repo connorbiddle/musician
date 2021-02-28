@@ -17,6 +17,11 @@ const GlobalStyles = createGlobalStyle`
     font-family: inherit;
   }
 
+  img {
+    max-width: 100%;
+    margin-bottom: -4px;
+  }
+
   .site-wrapper {
     position: relative;
     z-index: 1;

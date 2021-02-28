@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Pagination = ({ totalItems, itemsPerPage, onChange }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+const Pagination = ({ className, items, itemsPerPage, onChange }) => {
+  const totalPages = Math.ceil(items.length / itemsPerPage);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstPage, setIsFirstPage] = useState(true);
@@ -34,12 +34,13 @@ const Pagination = ({ totalItems, itemsPerPage, onChange }) => {
 
     const firstIndex = currentPage * itemsPerPage - itemsPerPage;
     const lastIndex = firstIndex + itemsPerPage - 1;
+    const newItems = items.slice(firstIndex, lastIndex + 1);
 
-    onChange(firstIndex, lastIndex);
+    onChange(newItems);
   }, [currentPage]);
 
   return (
-    <StyledPagination>
+    <StyledPagination className={className}>
       <button
         onMouseDown={firstPage}
         className="pagination-item"
@@ -54,7 +55,9 @@ const Pagination = ({ totalItems, itemsPerPage, onChange }) => {
       >
         <i className="fas fa-angle-left" />
       </button>
-      <div className="pagination-item">{currentPage}</div>
+      <div key={currentPage} className="pagination-item page-no">
+        {currentPage}
+      </div>
       <button
         onMouseDown={nextPage}
         className="pagination-item"
@@ -77,7 +80,6 @@ const StyledPagination = styled.div`
   display: flex;
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 5rem;
 
   .pagination-item {
     margin: 0 0.75rem;
@@ -88,6 +90,10 @@ const StyledPagination = styled.div`
     justify-content: center;
   }
 
+  .page-no {
+    cursor: default;
+  }
+
   button {
     cursor: pointer;
     border: none;
@@ -96,7 +102,11 @@ const StyledPagination = styled.div`
     font-size: 0.85em;
     width: 2rem;
     height: 2rem;
-    transition: opacity 200ms ease;
+    transition: opacity 200ms ease, transform 100ms linear;
+
+    &:active {
+      transform: scale(0.5);
+    }
 
     &:disabled {
       cursor: default;

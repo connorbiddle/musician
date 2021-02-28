@@ -31,18 +31,9 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    {
-      text: "Store",
-      url: "/",
-    },
-    {
-      text: "Live",
-      url: "/live",
-    },
-    {
-      text: "Subscribe",
-      url: "/subscribe",
-    },
+    { text: "Store", url: "/" },
+    { text: "Live", url: "/live" },
+    { text: "Subscribe", url: "/subscribe" },
   ];
 
   return (
@@ -94,7 +85,7 @@ const StyledNavbar = styled.nav`
     background: rgba(0, 0, 0, 0.9);
     z-index: 100;
 
-    animation: ${fade} 350ms ease forwards;
+    animation: ${fade()} 350ms ease forwards;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -145,7 +136,7 @@ const StyledNavbar = styled.nav`
           font-size: 1.5rem;
           padding: 0.25rem 0.75rem;
           border-radius: 5px;
-          transition: background-color 300ms ease-out, color 300ms ease-out;
+          transition: background-color 250ms ease-out, color 250ms ease-out;
 
           &.active {
             background-color: #fff;

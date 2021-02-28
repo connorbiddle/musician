@@ -1,11 +1,11 @@
 import { keyframes } from "styled-components";
 
-export const fade = keyframes`
+export const fade = () => keyframes`
   0% { opacity: 0; }
   100% { opacity: 1; }
 `;
 
-export const fadeUp = keyframes`
+export const fadeUp = () => keyframes`
   0% {
     opacity: 0;
     transform: translateY(1rem);
@@ -16,7 +16,18 @@ export const fadeUp = keyframes`
   }
 `;
 
-export const bounce = keyframes`
+export const fadeDown = (x = "0") => keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(${x}, -1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(${x}, 0);
+  }
+`;
+
+export const bounce = () => keyframes`
   0% {
     transform: translateY(-0.75rem);
   }

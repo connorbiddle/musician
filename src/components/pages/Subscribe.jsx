@@ -1,8 +1,8 @@
 import Page from "../presentational/Page";
 
-const Subscribe = () => {
+const Subscribe = ({ appHeight }) => {
   return (
-    <Page>
+    <Page appHeight={appHeight}>
       This is the Subscribe page. Lorem ipsum dolor sit amet consectetur
       adipisicing.
     </Page>

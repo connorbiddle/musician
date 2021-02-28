@@ -3,9 +3,9 @@ import { fadeUp, bounce } from "../../styles/animations";
 import { atSmall, atXLarge } from "../../styles/mixins";
 import Logo from "../../assets/images/logo.svg";
 
-const Showcase = () => {
+const Showcase = props => {
   return (
-    <StyledShowcase>
+    <StyledShowcase {...props}>
       <div className="logo">
         <img src={Logo} alt="Band logo" />
       </div>
@@ -15,15 +15,14 @@ const Showcase = () => {
 };
 
 const StyledShowcase = styled.header`
-  height: ${window.innerHeight}px;
-  // ^ vh units can cause issues on mobile devices. ^
+  height: ${({ appHeight }) => appHeight}px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  animation: ${fadeUp} ease 1s forwards 0.3s;
+  animation: ${fadeUp()} ease 1s forwards 0.3s;
 
   .logo {
     width: 300px;
@@ -37,7 +36,7 @@ const StyledShowcase = styled.header`
     position: absolute;
     bottom: 2rem;
     left: calc(50% - 1rem);
-    animation: ${bounce} ease-in-out 1s alternate infinite;
+    animation: ${bounce()} ease-in-out 1s alternate infinite;
   }
 `;
 

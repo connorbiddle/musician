@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { fade } from "../../styles/animations";
+import { fadeDown } from "../../styles/animations";
 
-const Dropdown = ({ options, onChange }) => {
+const Dropdown = ({ className, options, onChange }) => {
+  if (!options) throw new Error("Dropdown requires 'options' prop.");
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeChoice, setActiveChoice] = useState(null);
 
@@ -20,9 +22,9 @@ const Dropdown = ({ options, onChange }) => {
   }, [activeChoice]);
 
   return (
-    <StyledDropdown>
+    <StyledDropdown className={className}>
       <button className="active-choice" onMouseDown={toggleDropdown}>
-        {activeChoice ? activeChoice : "All"}{" "}
+        {activeChoice ? activeChoice : "All"}
         <i className={`fas fa-angle-${isOpen ? "up" : "down"}`} />
       </button>
       {isOpen && (
@@ -44,7 +46,7 @@ const Dropdown = ({ options, onChange }) => {
 const StyledDropdown = styled.div`
   position: relative;
   font-size: 1.25rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
   padding: 0.5rem;
 
   .active-choice {
@@ -55,29 +57,37 @@ const StyledDropdown = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     > i {
-      margin-left: 0.25rem;
+      margin-left: 0.5rem;
     }
   }
 
   .choices {
     position: absolute;
-    background: rgba(0, 0, 0, 0.825);
+    background: rgba(255, 255, 255, 0.85);
+    color: #111;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 5px;
     padding: 0.5rem;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
-    animation: ${fade} 250ms ease forwards;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    animation: ${fadeDown("-50%")} 250ms ease forwards;
+    z-index: 2;
 
     .choice {
       cursor: pointer;
       padding: 0.5rem;
       transition: all ease 200ms;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
       &:hover {
-        background-color: rgba(255, 255, 255, 0.05);
+        background-color: rgba(0, 0, 0, 0.04);
       }
     }
   }

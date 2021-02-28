@@ -1,8 +1,8 @@
 import Page from "../presentational/Page";
 
-const Live = () => {
+const Live = ({ appHeight }) => {
   return (
-    <Page>
+    <Page appHeight={appHeight}>
       This is the Live page. Lorem ipsum dolor sit amet consectetur adipisicing.
     </Page>
   );
