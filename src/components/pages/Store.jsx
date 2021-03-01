@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Page from "../presentational/Page";
 import Products from "../parts/Products";
 import Pagination from "../utilities/Pagination";
 import Dropdown from "../utilities/Dropdown";
 import products from "../../products";
+import { atLarge } from "../../styles/mixins";
 
 const PRODUCTS_PER_PAGE = 4;
 
@@ -38,7 +39,8 @@ const Store = ({ appHeight }) => {
   };
 
   useEffect(() => {
-    if (filteredProducts) setShownProducts(filteredProducts.slice(0, 4));
+    if (filteredProducts)
+      setShownProducts(filteredProducts.slice(0, PRODUCTS_PER_PAGE));
   }, [filteredProducts]);
 
   return (
@@ -66,17 +68,25 @@ const Store = ({ appHeight }) => {
 
 const StyledDropdown = styled(Dropdown)`
   position: absolute;
-  top: 0;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+
+  ${atLarge(css`
+    top: 10%;
+  `)}
 `;
 
 const StyledPagination = styled(Pagination)`
   position: absolute;
-  bottom: 1.5%;
+  bottom: 3.5%;
   left: 50%;
   transform: translateX(-50%);
+
+  ${atLarge(css`
+    bottom: 7.5%;
+  `)}
 `;
 
 export default Store;

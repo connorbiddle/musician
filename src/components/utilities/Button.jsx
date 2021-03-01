@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-import React from "react";
+import { atLarge } from "../../styles/mixins";
 
 const Button = props => {
   return <StyledButton {...props}>{props.children}</StyledButton>;
@@ -16,6 +15,9 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
   text-transform: uppercase;
+  text-decoration: none;
+
+  ${atLarge("font-size: 1.1rem")}
 `;
 
 export default Button;

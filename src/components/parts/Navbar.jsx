@@ -165,8 +165,8 @@ const StyledNavbar = styled.nav`
     border: none;
     color: #fff;
     font-size: 1.25rem;
-    font-weight: 700;
-    opacity: 0.85;
+    font-weight: 400;
+    opacity: 0.75;
     text-transform: uppercase;
     z-index: 101;
 

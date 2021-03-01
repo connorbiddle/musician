@@ -17,5 +17,5 @@ export const randomFromArray = arr => {
 export const shorten = (str, wordCount) => {
   const words = str.split(" ");
   if (words.length <= wordCount) return str;
-  return words.slice(0, wordCount + 1).join(" ") + "...";
+  return words.slice(0, wordCount).join(" ") + "...";
 };

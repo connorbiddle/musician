@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import { v4 as uuid } from "uuid";
 import { loremIpsum } from "lorem-ipsum";
 import { randomFromArray } from "./utilities";
@@ -5,7 +6,7 @@ import MusicImage from "./assets/images/placeholder-music.jpg";
 import ClothingImage from "./assets/images/placeholder-clothing.jpg";
 import AccessoryImage from "./assets/images/placeholder-accessory.jpg";
 
-const generateProducts = (productCount = 20) => {
+const generateProducts = productCount => {
   const products = [];
   const categories = ["Music", "Clothing", "Accessories"];
   const images = {
@@ -15,21 +16,25 @@ const generateProducts = (productCount = 20) => {
   };
 
   for (let i = 0; i < productCount; i++) {
-    const category = randomFromArray(categories);
     const words = 5 + Math.ceil(Math.random() * 15);
-    const image = images[category];
 
-    products.push({
+    const newProduct = {
       id: uuid(),
       title: `Item ${i + 1}`,
+      sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
       price: Math.ceil(Math.random() * 16 + 4) - 0.01,
       description: loremIpsum({ count: words, units: "words" }) + ".",
-      image,
-      category,
-    });
+      category: randomFromArray(categories),
+    };
+
+    newProduct.image = images[newProduct.category];
+    newProduct.slug = slugify(newProduct.title, { lower: true });
+
+    products.push(newProduct);
   }
 
   return products;
 };
 
-export default generateProducts(30);
+const products = generateProducts(30);
+export default products;

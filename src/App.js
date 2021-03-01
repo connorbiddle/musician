@@ -8,6 +8,7 @@ import GlobalStyles from "./styles/globalStyles";
 import Store from "./components/pages/Store";
 import Live from "./components/pages/Live";
 import Subscribe from "./components/pages/Subscribe";
+import Product from "./components/pages/Product";
 
 function App() {
   const [appHeight, setAppHeight] = useState(window.innerHeight);
@@ -40,6 +41,16 @@ function App() {
                 exact
                 path="/subscribe"
                 render={() => <Subscribe appHeight={appHeight} />}
+              />
+              <Route
+                exact
+                path="/product/:slug"
+                render={routeProps => (
+                  <Product
+                    appHeight={appHeight}
+                    slug={routeProps.match.params.slug}
+                  />
+                )}
               />
             </Switch>
           </Container>
