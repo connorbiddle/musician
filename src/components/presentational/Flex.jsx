@@ -7,6 +7,7 @@ const Flex = styled.div`
   width: ${({ width }) => width};
   align-items: ${({ alignItems }) => alignItems};
   justify-content: ${({ justifyContent }) => justifyContent};
+  flex-direction: ${({ direction }) => direction};
 `;
 
 export default Flex;

@@ -4,23 +4,31 @@ import Button from "./Button";
 import { shorten } from "../../utilities";
 import { atLarge } from "../../styles/mixins";
 
-const Product = ({ id, title, price, description, category, image, slug }) => {
+const ProductSmall = ({
+  id,
+  title,
+  price,
+  description,
+  category,
+  image,
+  slug,
+}) => {
   return (
-    <StyledProduct to={`/product/${slug}`}>
-      <figure className="product-image">
+    <StyledProductSmall to={`/product/${slug}`}>
+      <figure className="product-sm-image">
         <img src={image} alt={title} />
-        <figcaption className="product-price">£{price}</figcaption>
+        <figcaption className="product-sm-price">£{price}</figcaption>
       </figure>
-      <div className="product-details">
-        <h2 className="product-title">{title}</h2>
-        <p className="product-description">{shorten(description, 7)}</p>
-        <Button className="product-button">View</Button>
+      <div className="product-sm-details">
+        <h2 className="product-sm-title">{title}</h2>
+        <p className="product-sm-description">{shorten(description, 7)}</p>
+        <Button className="product-sm-button">View</Button>
       </div>
-    </StyledProduct>
+    </StyledProductSmall>
   );
 };
 
-const StyledProduct = styled(Link)`
+const StyledProductSmall = styled(Link)`
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -31,7 +39,7 @@ const StyledProduct = styled(Link)`
     margin-bottom: 0;
   }
 
-  .product-image {
+  .product-sm-image {
     position: relative;
     width: 70px;
     min-width: 70px;
@@ -44,7 +52,7 @@ const StyledProduct = styled(Link)`
       min-width: 100%;
     }
 
-    .product-price {
+    .product-sm-price {
       position: absolute;
       bottom: -1px;
       right: -1px;
@@ -62,20 +70,20 @@ const StyledProduct = styled(Link)`
     }
   }
 
-  .product-title {
+  .product-sm-title {
     margin-top: -0.2em;
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
   }
 
-  .product-description {
+  .product-sm-description {
     margin-bottom: 0.5rem;
     font-size: 0.85rem;
     line-height: 1.3;
   }
 
-  .product-button {
+  .product-sm-button {
     display: none;
 
     ${atLarge(css`
@@ -91,26 +99,26 @@ const StyledProduct = styled(Link)`
       margin: 1.75rem 0;
     }
 
-    .product-image {
+    .product-sm-image {
       width: 140px;
       min-width: 140px;
       margin-right: 1rem;
 
-      .product-price {
+      .product-sm-price {
         font-size: 0.9rem;
       }
     }
 
-    .product-title {
+    .product-sm-title {
       font-size: 1.6rem;
       margin-bottom: 0.35rem;
     }
 
-    .product-description {
+    .product-sm-description {
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
     }
   `)}
 `;
 
-export default Product;
+export default ProductSmall;

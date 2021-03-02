@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { fadeDown } from "../../styles/animations";
+import { atLarge } from "../../styles/mixins";
 
-const Dropdown = ({ className, options, onChange }) => {
+const Dropdown = ({ className, options, noneText, disallowNone, onChange }) => {
   if (!options) throw new Error("Dropdown requires 'options' prop.");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +25,17 @@ const Dropdown = ({ className, options, onChange }) => {
   return (
     <StyledDropdown className={className}>
       <button className="active-choice" onMouseDown={toggleDropdown}>
-        {activeChoice ? activeChoice : "All"}
+        {activeChoice ? activeChoice : noneText}
         <i className={`fas fa-angle-${isOpen ? "up" : "down"}`} />
       </button>
       {isOpen && (
         <div className="choices">
-          <div className="choice" onMouseDown={select(null)}>
-            All
-          </div>
+          {!disallowNone && (
+            <div className="choice" onMouseDown={select(null)}>
+              {noneText}
+            </div>
+          )}
+
           {options.map((option, index) => (
             <div className="choice" onMouseDown={select(option)} key={index}>
               {option}
@@ -46,7 +50,7 @@ const Dropdown = ({ className, options, onChange }) => {
 const StyledDropdown = styled.div`
   position: relative;
   font-size: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
 
   .active-choice {
@@ -79,6 +83,13 @@ const StyledDropdown = styled.div`
     animation: ${fadeDown("-50%")} 250ms ease forwards;
     z-index: 2;
 
+    max-height: 7.75rem;
+    overflow-y: scroll;
+    ${atLarge(css`
+      max-height: unset;
+      overflow-y: unset;
+    `)}
+
     .choice {
       cursor: pointer;
       padding: 0.5rem;
@@ -86,6 +97,8 @@ const StyledDropdown = styled.div`
       text-align: center;
       text-transform: uppercase;
       font-weight: 700;
+      font-size: 0.9em;
+
       &:hover {
         background-color: rgba(0, 0, 0, 0.04);
       }

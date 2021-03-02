@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     height: 200vh; //temp!
     font-family: 'Work Sans', sans-serif;
     color: #fff;
+    background: #111;
   }
 
   button, input {
@@ -18,6 +19,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   img {
+    display: block;
+    width: 100%;
     max-width: 100%;
     margin-bottom: -4px;
   }

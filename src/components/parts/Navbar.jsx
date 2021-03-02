@@ -65,7 +65,7 @@ const Navbar = () => {
           </a>
         </div>
       </div>
-      <button className="menu-btn" onClick={toggleNav}>
+      <button className="menu-btn" onMouseDown={toggleNav}>
         {visible ? "Close" : "Menu"}
       </button>
     </StyledNavbar>

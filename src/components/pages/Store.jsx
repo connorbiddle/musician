@@ -48,6 +48,7 @@ const Store = ({ appHeight }) => {
       {shownProducts ? (
         <>
           <StyledDropdown
+            noneText="All"
             options={getCategories()}
             onChange={onDropdownChange}
           />
