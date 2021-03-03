@@ -4,7 +4,7 @@ import Page from "../presentational/Page";
 import Flex from "../presentational/Flex";
 import Button from "../utilities/Button";
 import Dropdown from "../utilities/Dropdown";
-import products from "../../products";
+import products from "../../data/products";
 import { fade } from "../../styles/animations";
 import { atLarge } from "../../styles/mixins";
 import { CartContext } from "../../context/CartContext";

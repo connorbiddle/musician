@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    height: 200vh; //temp!
+    min-height: 200vh;
     font-family: 'Work Sans', sans-serif;
     color: #fff;
     background: #111;

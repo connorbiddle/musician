@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   const openNav = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, window.innerHeight);
     setVisible(true);
     document.body.style.overflowY = "hidden";
   };

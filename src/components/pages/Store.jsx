@@ -4,7 +4,7 @@ import Page from "../presentational/Page";
 import Products from "../parts/Products";
 import Pagination from "../utilities/Pagination";
 import Dropdown from "../utilities/Dropdown";
-import products from "../../products";
+import products from "../../data/products";
 import { atLarge } from "../../styles/mixins";
 
 const PRODUCTS_PER_PAGE = 4;

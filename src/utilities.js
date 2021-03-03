@@ -19,3 +19,6 @@ export const shorten = (str, wordCount) => {
   if (words.length <= wordCount) return str;
   return words.slice(0, wordCount).join(" ") + "...";
 };
+
+export const toTitleCase = str =>
+  str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());

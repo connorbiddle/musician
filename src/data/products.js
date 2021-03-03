@@ -1,10 +1,10 @@
 import slugify from "slugify";
 import { v4 as uuid } from "uuid";
 import { loremIpsum } from "lorem-ipsum";
-import { randomFromArray } from "./utilities";
-import MusicImage from "./assets/images/placeholder-music.jpg";
-import ClothingImage from "./assets/images/placeholder-clothing.jpg";
-import AccessoryImage from "./assets/images/placeholder-accessory.jpg";
+import { randomFromArray } from "../utilities";
+import MusicImage from "../assets/images/placeholder-music.jpg";
+import ClothingImage from "../assets/images/placeholder-clothing.jpg";
+import AccessoryImage from "../assets/images/placeholder-accessory.jpg";
 
 const generateProducts = productCount => {
   const products = [];
@@ -36,5 +36,6 @@ const generateProducts = productCount => {
   return products;
 };
 
-const products = generateProducts(30);
+const numOfProducts = 26 + Math.ceil(Math.random() * 8);
+const products = generateProducts(numOfProducts);
 export default products;
