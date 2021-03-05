@@ -2,20 +2,17 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import BG from "../../assets/images/background.png";
 import BGBlur from "../../assets/images/background-blur.png";
-import { throttled } from "../../utilities";
 
-const Background = () => {
+const Background = ({ scrollPosition }) => {
   const [blur, setBlur] = useState(0);
 
   const blurBackground = () => {
-    const viewportsScrolled = window.scrollY / window.innerHeight;
+    const viewportsScrolled = scrollPosition / window.innerHeight;
     const blurValue = viewportsScrolled <= 1 ? viewportsScrolled * 2 : 1;
     setBlur(blurValue);
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", throttled(blurBackground, 60));
-  }, []);
+  useEffect(() => blurBackground(), [scrollPosition]);
 
   return (
     <StyledBackground blur={blur}>

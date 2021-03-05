@@ -4,22 +4,16 @@ import Live from "./components/pages/Live";
 import Subscribe from "./components/pages/Subscribe";
 import Product from "./components/pages/Product";
 
-const Routes = ({ appHeight }) => {
+const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Store appHeight={appHeight} />} />
-      <Route exact path="/live" render={() => <Live appHeight={appHeight} />} />
-      <Route
-        exact
-        path="/subscribe"
-        render={() => <Subscribe appHeight={appHeight} />}
-      />
+      <Route exact path="/" render={() => <Store />} />
+      <Route exact path="/live" render={() => <Live />} />
+      <Route exact path="/subscribe" render={() => <Subscribe />} />
       <Route
         exact
         path="/product/:slug"
-        render={routeProps => (
-          <Product appHeight={appHeight} slug={routeProps.match.params.slug} />
-        )}
+        render={({ match }) => <Product slug={match.params.slug} />}
       />
     </Switch>
   );

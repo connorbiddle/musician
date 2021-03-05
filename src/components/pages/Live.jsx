@@ -9,7 +9,7 @@ import moment from "moment";
 
 const SHOWS_PER_PAGE = 4;
 
-const Live = ({ appHeight }) => {
+const Live = () => {
   const [shows, setAllShows] = useState(null);
   const [displayedShows, setDisplayedShows] = useState(null);
 
@@ -28,7 +28,7 @@ const Live = ({ appHeight }) => {
     setDisplayedShows(newItems);
   };
   return (
-    <Page appHeight={appHeight}>
+    <Page>
       {displayedShows ? (
         <>
           <Shows shows={displayedShows} />
@@ -46,14 +46,7 @@ const Live = ({ appHeight }) => {
 };
 
 const StyledPagination = styled(Pagination)`
-  position: absolute;
-  bottom: 3.5%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  ${atLarge(css`
-    bottom: 5%;
-  `)}
+  margin: 1.5rem 0 2.5rem;
 `;
 
 export default Live;

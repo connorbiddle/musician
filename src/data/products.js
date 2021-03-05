@@ -16,7 +16,7 @@ const generateProducts = productCount => {
   };
 
   for (let i = 0; i < productCount; i++) {
-    const words = 5 + Math.ceil(Math.random() * 15);
+    const words = 5 + Math.ceil(Math.random() * 30);
 
     const newProduct = {
       id: uuid(),

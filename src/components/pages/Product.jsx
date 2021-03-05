@@ -8,10 +8,11 @@ import products from "../../data/products";
 import { fade } from "../../styles/animations";
 import { atLarge } from "../../styles/mixins";
 import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
-const Product = ({ appHeight, slug }) => {
+const Product = ({ slug }) => {
   const [product, setProduct] = useState(null);
-  const [size, setSize] = useState(null);
+  const [itemSize, setItemSize] = useState(null);
 
   const { addItem } = useContext(CartContext);
 
@@ -21,12 +22,12 @@ const Product = ({ appHeight, slug }) => {
     }, 500);
   }, []);
 
-  const onDropdownChange = choice => setSize(choice);
+  const onDropdownChange = choice => setItemSize(choice);
 
   const addToCart = () => addItem(product);
 
   return (
-    <Page appHeight={appHeight}>
+    <StyledPage>
       {product === null ? (
         <Flex
           height="100%"
@@ -37,38 +38,43 @@ const Product = ({ appHeight, slug }) => {
           Loading...
         </Flex>
       ) : (
-        <StyledProduct>
-          <figure className="product-image">
-            <img src={product.image} alt={product.title} />
-          </figure>
-          <div className="product-details">
-            <h1 className="product-title">{product.title}</h1>
-            <div className="product-price">£{product.price}</div>
-            <p className="product-description">{product.description}</p>
-            <div className="product-interact">
-              {product.category === "Clothing" && (
-                <Dropdown
-                  options={product.sizes}
-                  onChange={onDropdownChange}
-                  noneText="Sizes"
-                  disallowNone
-                />
-              )}
-              <Button onClick={addToCart}>Add to cart</Button>
+        <>
+          <Link to="/" className="product-go-back">
+            <i className="fas fa-angle-left" /> Back to Store
+          </Link>
+          <StyledProduct>
+            <figure className="product-image">
+              <img src={product.image} alt={product.title} />
+            </figure>
+            <div className="product-details">
+              <h1 className="product-title">{product.title}</h1>
+              <div className="product-price">£{product.price}</div>
+              <p className="product-description">{product.description}</p>
+              <div className="product-interact">
+                {product.category === "Clothing" && (
+                  <Dropdown
+                    options={product.sizes}
+                    onChange={onDropdownChange}
+                    noneText="Sizes"
+                    disallowNone
+                  />
+                )}
+                <Button onClick={addToCart}>Add to cart</Button>
+              </div>
             </div>
-          </div>
-        </StyledProduct>
+          </StyledProduct>
+        </>
       )}
-    </Page>
+    </StyledPage>
   );
 };
 
 const StyledProduct = styled.div`
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   max-width: 375px;
-  margin: auto;
+  margin: 0 auto;
   animation: ${fade} 500ms ease;
 
   .product-image {
@@ -113,7 +119,8 @@ const StyledProduct = styled.div`
   ${atLarge(css`
     flex-direction: row;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    width: 850px;
     max-width: 100%;
 
     .product-image {
@@ -129,7 +136,7 @@ const StyledProduct = styled.div`
     }
 
     .product-details {
-      flex: 3;
+      flex: 2.5;
     }
 
     .product-title {
@@ -157,6 +164,27 @@ const StyledProduct = styled.div`
       align-items: flex-start;
     }
   `)}
+`;
+
+const StyledPage = styled(Page)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .product-go-back {
+    animation: ${fade} 500ms ease;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: -3rem 0 2rem;
+    font-size: 1.1rem;
+    > i {
+      margin-right: 0.5rem;
+    }
+  }
 `;
 
 export default Product;

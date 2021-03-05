@@ -23,13 +23,13 @@ const StyledProducts = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
 
   .products-inner {
     ${atLarge(css`
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+      padding-bottom: 1rem;
     `)}
   }
 `;

@@ -52,6 +52,9 @@ const StyledDropdown = styled.div`
   font-size: 1.25rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
+  ${atLarge(css`
+    font-size: 1.4rem;
+  `)}
 
   .active-choice {
     cursor: pointer;

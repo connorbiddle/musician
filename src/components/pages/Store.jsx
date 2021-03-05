@@ -9,7 +9,7 @@ import { atLarge } from "../../styles/mixins";
 
 const PRODUCTS_PER_PAGE = 4;
 
-const Store = ({ appHeight }) => {
+const Store = () => {
   const [allProducts, setAllProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
   const [shownProducts, setShownProducts] = useState(null);
@@ -44,7 +44,7 @@ const Store = ({ appHeight }) => {
   }, [filteredProducts]);
 
   return (
-    <Page appHeight={appHeight}>
+    <Page>
       {shownProducts ? (
         <>
           <StyledDropdown
@@ -69,19 +69,19 @@ const Store = ({ appHeight }) => {
 
 const StyledDropdown = styled(Dropdown)`
   position: absolute;
-  top: 5%;
+  top: 5vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
 
   ${atLarge(css`
-    top: 10%;
+    top: 12.5vh;
   `)}
 `;
 
 const StyledPagination = styled(Pagination)`
   position: absolute;
-  bottom: 3.5%;
+  bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
 

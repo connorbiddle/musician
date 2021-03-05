@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { fadeUp, bounce } from "../../styles/animations";
-import { atSmall, atXLarge } from "../../styles/mixins";
+import { atLarge, atSmall, atXLarge } from "../../styles/mixins";
 import Logo from "../../assets/images/logo.svg";
 
 const Showcase = props => {
@@ -15,7 +15,8 @@ const Showcase = props => {
 };
 
 const StyledShowcase = styled.header`
-  height: ${({ appHeight }) => appHeight}px;
+  height: 90vh;
+  min-height: 90vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,6 +24,11 @@ const StyledShowcase = styled.header`
   justify-content: center;
   opacity: 0;
   animation: ${fadeUp()} ease 1s forwards 0.3s;
+
+  ${atLarge(css`
+    height: 100vh;
+    min-height: 100vh;
+  `)}
 
   .logo {
     width: 300px;

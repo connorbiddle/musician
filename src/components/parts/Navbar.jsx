@@ -4,8 +4,9 @@ import styled, { css } from "styled-components";
 import { fade } from "../../styles/animations";
 import { atSmall, atLarge } from "../../styles/mixins";
 
-const Navbar = () => {
+const Navbar = ({ scrollPosition }) => {
   const [visible, setVisible] = useState(false);
+  const [menuBtnVisible, setMenuBtnVisible] = useState(false);
 
   const toggleNav = () => {
     if (visible) {
@@ -16,7 +17,6 @@ const Navbar = () => {
   };
 
   const openNav = () => {
-    window.scrollTo(0, window.innerHeight);
     setVisible(true);
     document.body.style.overflowY = "hidden";
   };
@@ -26,9 +26,15 @@ const Navbar = () => {
     document.body.style.overflowY = "scroll";
   };
 
+  const handleLinkClick = () => {
+    if (visible) closeNav();
+    window.scrollTo(0, window.innerHeight);
+  };
+
   useEffect(() => {
-    window.addEventListener("resize", closeNav);
-  }, []);
+    const viewportsScrolled = scrollPosition / window.innerHeight;
+    setMenuBtnVisible(viewportsScrolled >= 0.7);
+  }, [scrollPosition]);
 
   const links = [
     { text: "Store", url: "/" },
@@ -41,7 +47,7 @@ const Navbar = () => {
       <div className={"nav-contents" + (visible ? " visible" : "")}>
         {links.map(link => (
           <div className="nav-section" key={link.url}>
-            <NavLink exact to={link.url} onClick={visible ? closeNav : null}>
+            <NavLink exact to={link.url} onClick={handleLinkClick}>
               {link.text}
             </NavLink>
           </div>
@@ -65,8 +71,11 @@ const Navbar = () => {
           </a>
         </div>
       </div>
-      <button className="menu-btn" onMouseDown={toggleNav}>
-        {visible ? "Close" : "Menu"}
+      <button
+        className={menuBtnVisible ? "menu-btn visible" : "menu-btn"}
+        onMouseDown={toggleNav}
+      >
+        <i className={`fas fa-${visible ? "times" : "bars"}`} />
       </button>
     </StyledNavbar>
   );
@@ -122,6 +131,10 @@ const StyledNavbar = styled.nav`
   `)}
 
   ${atLarge(css`
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
     .nav-contents {
       position: static;
       display: flex;
@@ -157,18 +170,26 @@ const StyledNavbar = styled.nav`
 
   .menu-btn {
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     top: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 1.5rem;
     background: none;
     border: none;
     color: #fff;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 400;
     opacity: 0.75;
     text-transform: uppercase;
     z-index: 101;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+
+    &.visible {
+      opacity: 1;
+      pointer-events: unset;
+    }
 
     ${atSmall("font-size: 1.5rem")}
   }

@@ -5,23 +5,25 @@ import Showcase from "./components/parts/Showcase";
 import Navbar from "./components/parts/Navbar";
 import Container from "./components/presentational/Container";
 import Routes from "./Routes";
+import { throttled } from "./utilities";
 
 function App() {
-  const [appHeight, setAppHeight] = useState(window.innerHeight);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-    window.addEventListener("resize", () => setAppHeight(window.innerHeight));
+    const updateScrollPosition = () => setScrollPosition(window.scrollY);
+    window.addEventListener("scroll", throttled(updateScrollPosition, 50));
   }, []);
 
   return (
     <Router>
       <div className="App">
-        <Background />
+        <Background scrollPosition={scrollPosition} />
         <div className="site-wrapper">
-          <Showcase appHeight={appHeight} />
+          <Showcase />
           <Container>
-            <Navbar />
-            <Routes appHeight={appHeight} />
+            <Navbar scrollPosition={scrollPosition} />
+            <Routes />
           </Container>
         </div>
       </div>
