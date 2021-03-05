@@ -21,7 +21,7 @@ const generateTour = datesCount => {
       ticketsUrl: "/",
       location: {
         event: getEvent(),
-        venue: "An Example Venue",
+        venue: "Example Venue",
         city: "City, Country",
       },
     };
@@ -36,10 +36,25 @@ const generateTour = datesCount => {
 };
 
 const getEvent = () => {
-  const rfa = randomFromArray;
-  const w1 = rfa(["Pretty", "Rather", "Quite", "Fairly", "Relatively"]);
-  const w2 = rfa(["Alright", "Cool", "Good", "Decent", "Adequate"]);
-  const w3 = rfa(["Festival"]);
+  const w1 = randomFromArray([
+    "Pretty",
+    "Rather",
+    "Quite",
+    "Fairly",
+    "Relatively",
+    "Somewhat",
+    "Moderately",
+  ]);
+  const w2 = randomFromArray([
+    "Alright",
+    "Cool",
+    "Good",
+    "Decent",
+    "Adequate",
+    "Okay",
+    "Satisfactory",
+  ]);
+  const w3 = randomFromArray(["Festival"]);
 
   return `${w1} ${w2} ${w3}`;
 };

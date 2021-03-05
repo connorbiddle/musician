@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Page from "../presentational/Page";
 import Flex from "../presentational/Flex";
+import Loading from "../presentational/Loading";
 import Button from "../utilities/Button";
-import Dropdown from "../utilities/Dropdown";
+import Input from "../utilities/Input";
 import products from "../../data/products";
 import { fade } from "../../styles/animations";
 import { atLarge } from "../../styles/mixins";
@@ -12,7 +13,8 @@ import { Link } from "react-router-dom";
 
 const Product = ({ slug }) => {
   const [product, setProduct] = useState(null);
-  const [itemSize, setItemSize] = useState(null);
+  const [itemQuantity, setItemQuantity] = useState(null);
+  const [added, setAdded] = useState(false);
 
   const { addItem } = useContext(CartContext);
 
@@ -22,9 +24,13 @@ const Product = ({ slug }) => {
     }, 500);
   }, []);
 
-  const onDropdownChange = choice => setItemSize(choice);
-
-  const addToCart = () => addItem(product);
+  const addToCart = () => {
+    const quantity = parseInt(itemQuantity);
+    if (!isNaN(quantity)) {
+      addItem({ ...product }, parseInt(itemQuantity));
+      setAdded(true);
+    }
+  };
 
   return (
     <StyledPage>
@@ -35,7 +41,7 @@ const Product = ({ slug }) => {
           alignItems="center"
           justifyContent="center"
         >
-          Loading...
+          <Loading />
         </Flex>
       ) : (
         <>
@@ -51,15 +57,17 @@ const Product = ({ slug }) => {
               <div className="product-price">£{product.price}</div>
               <p className="product-description">{product.description}</p>
               <div className="product-interact">
-                {product.category === "Clothing" && (
-                  <Dropdown
-                    options={product.sizes}
-                    onChange={onDropdownChange}
-                    noneText="Sizes"
-                    disallowNone
+                <div className="product-add-to-cart">
+                  <Input
+                    className="product-quantity"
+                    default={1}
+                    onChange={setItemQuantity}
+                    disabled={added}
                   />
-                )}
-                <Button onClick={addToCart}>Add to cart</Button>
+                  <Button onClick={addToCart} disabled={added}>
+                    {!added ? "Add to Cart" : "Item Added!"}
+                  </Button>
+                </div>
               </div>
             </div>
           </StyledProduct>
@@ -70,7 +78,6 @@ const Product = ({ slug }) => {
 };
 
 const StyledProduct = styled.div`
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   max-width: 375px;
@@ -183,6 +190,17 @@ const StyledPage = styled(Page)`
     font-size: 1.1rem;
     > i {
       margin-right: 0.5rem;
+    }
+  }
+
+  .product-add-to-cart {
+    display: flex;
+    align-items: center;
+
+    .product-quantity {
+      width: 3rem;
+      text-align: center;
+      margin-right: 1.5rem;
     }
   }
 `;

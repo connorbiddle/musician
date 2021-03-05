@@ -35,3 +35,12 @@ export const bounce = () => keyframes`
     transform: translateY(0rem);
   }
 `;
+
+export const spin = () => keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;

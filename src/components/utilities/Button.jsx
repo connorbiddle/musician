@@ -12,6 +12,12 @@ const Button = styled.button`
   border-radius: 5px;
   text-transform: uppercase;
   text-decoration: none;
+  transition: opacity 200ms ease-out;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 
   ${atLarge("font-size: 1.1rem")}
 `;

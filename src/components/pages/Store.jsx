@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Page from "../presentational/Page";
+import Loading from "../presentational/Loading";
 import Products from "../parts/Products";
 import Pagination from "../utilities/Pagination";
 import Dropdown from "../utilities/Dropdown";
@@ -61,7 +62,7 @@ const Store = () => {
           />
         </>
       ) : (
-        "Loading..."
+        <Loading />
       )}
     </Page>
   );
@@ -69,7 +70,7 @@ const Store = () => {
 
 const StyledDropdown = styled(Dropdown)`
   position: absolute;
-  top: 5vh;
+  top: 10vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -81,7 +82,7 @@ const StyledDropdown = styled(Dropdown)`
 
 const StyledPagination = styled(Pagination)`
   position: absolute;
-  bottom: 0%;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 

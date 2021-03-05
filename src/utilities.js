@@ -22,3 +22,10 @@ export const shorten = (str, wordCount) => {
 
 export const toTitleCase = str =>
   str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
+
+export const formatPrice = price => {
+  let pounds = Math.floor(price).toString();
+  let pennies = Math.round((price % 1) * 100).toString();
+  if (pennies.length < 2) pennies = `${pennies}0`;
+  return `£${pounds}.${pennies}`;
+};

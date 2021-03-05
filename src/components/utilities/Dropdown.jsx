@@ -86,7 +86,7 @@ const StyledDropdown = styled.div`
     animation: ${fadeDown("-50%")} 250ms ease forwards;
     z-index: 2;
 
-    max-height: 7.75rem;
+    max-height: 11rem;
     overflow-y: scroll;
     ${atLarge(css`
       max-height: unset;

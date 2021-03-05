@@ -21,7 +21,6 @@ const generateProducts = productCount => {
     const newProduct = {
       id: uuid(),
       title: `Item ${i + 1}`,
-      sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
       price: Math.ceil(Math.random() * 16 + 4) - 0.01,
       description: loremIpsum({ count: words, units: "words" }) + ".",
       category: randomFromArray(categories),

@@ -18,12 +18,10 @@ const Navbar = ({ scrollPosition }) => {
 
   const openNav = () => {
     setVisible(true);
-    document.body.style.overflowY = "hidden";
   };
 
   const closeNav = () => {
     setVisible(false);
-    document.body.style.overflowY = "scroll";
   };
 
   const handleLinkClick = () => {
@@ -71,10 +69,7 @@ const Navbar = ({ scrollPosition }) => {
           </a>
         </div>
       </div>
-      <button
-        className={menuBtnVisible ? "menu-btn visible" : "menu-btn"}
-        onMouseDown={toggleNav}
-      >
+      <button className="menu-btn" onMouseDown={toggleNav}>
         <i className={`fas fa-${visible ? "times" : "bars"}`} />
       </button>
     </StyledNavbar>
@@ -101,17 +96,23 @@ const StyledNavbar = styled.nav`
     align-items: center;
 
     .nav-section {
-      margin-bottom: 1.5rem;
-
       a {
+        display: block;
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 700;
+        padding: 0.75rem 0;
+      }
+
+      &.socials {
+        margin-top: 1rem;
+        ${atLarge("margin-top: 0;")}
       }
 
       &.socials a {
+        display: inline;
         margin: 0 0.75rem;
       }
     }
@@ -178,18 +179,8 @@ const StyledNavbar = styled.nav`
     color: #fff;
     font-size: 1.75rem;
     font-weight: 400;
-    opacity: 0.75;
     text-transform: uppercase;
     z-index: 101;
-
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 250ms ease;
-
-    &.visible {
-      opacity: 1;
-      pointer-events: unset;
-    }
 
     ${atSmall("font-size: 1.5rem")}
   }
