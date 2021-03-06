@@ -29,3 +29,8 @@ export const formatPrice = price => {
   if (pennies.length < 2) pennies = `${pennies}0`;
   return `£${pounds}.${pennies}`;
 };
+
+export const emailIsValid = email => {
+  const regex = /\S+@\S+\.\S+/;
+  return regex.test(email);
+};

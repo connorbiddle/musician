@@ -18,11 +18,13 @@ const Shows = ({ shows }) => {
 
 const StyledShows = styled.div`
   animation: ${fade()} 750ms ease;
+  min-height: 735px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   ${atLarge(css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     height: 100%;
   `)}
 `;
