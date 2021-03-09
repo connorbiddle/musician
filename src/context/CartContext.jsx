@@ -7,12 +7,14 @@ const CartProvider = ({ children }) => {
 
   const addItem = (item, quantity = 1) => {
     const itemInCart = cart.find(prod => prod.id === item.id);
+    const amount = parseInt(quantity);
+
     if (!itemInCart) {
-      setCart(oldCart => [...oldCart, { ...item, quantity }]);
+      setCart(oldCart => [...oldCart, { ...item, quantity: amount }]);
     } else {
       const newItem = {
         ...itemInCart,
-        quantity: itemInCart.quantity + quantity,
+        quantity: itemInCart.quantity + amount,
       };
       setCart(oldCart => [
         ...oldCart.filter(prod => prod.id !== newItem.id),
@@ -25,13 +27,15 @@ const CartProvider = ({ children }) => {
     setCart(oldCart => oldCart.filter(item => item.id !== id));
   };
 
-  const changeQuantity = (id, newQuantity) => {
-    if (isNaN(parseInt(newQuantity))) return;
+  const changeQuantity = (id, quantity) => {
+    const amount = parseInt(quantity);
+    if (isNaN(amount)) return;
+
     setCart(oldCart => {
       const oldItem = oldCart.find(item => item.id === id);
       const index = oldCart.indexOf(oldItem);
       const newItems = [...oldCart];
-      newItems.splice(index, 1, { ...oldItem, quantity: newQuantity });
+      newItems.splice(index, 1, { ...oldItem, quantity: amount });
       return newItems;
     });
   };
